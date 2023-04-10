@@ -1,0 +1,22 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bad_code.js",
+  "scripts": {
+    "start" : "tsc good_code.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KonstantinAleksandrov/typescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KonstantinAleksandrov/typescript/issues"
+  },
+  "homepage": "https://github.com/KonstantinAleksandrov/typescript#readme",
+  "dependencies": {
+    "typescript": "^5.0.4"
+  }
+}
