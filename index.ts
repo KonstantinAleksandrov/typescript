@@ -72,15 +72,21 @@ const vasya: Person = {
   ]
 }
 
-
-interface CSS {
-  [state: string]: string | number,
+interface Student<T> extends Person {
+  graduation: T
 }
 
-const css: CSS = {
-  width: '33px',
-  margin: '22px 44px'
+interface SchoolStudent extends Student<string> {
+
 }
+
+const petya: Student<string> = {
+  ...human,
+  name: 'petya',
+  graduation: 'high elementary school'
+}
+
+
 
 
 function getField(person: Person, field: string): string {
@@ -97,10 +103,49 @@ const getAge = (person: Person): number => {
   return person.age
 }
 
-function setValue(person: Person, newName: string): void {
-  person.name = newName
+function setValue<T>(student: Student<T>, newG: T): T {
+  student.graduation = newG
+  return newG
 }
+
+setValue<string>(petya, 'low elementary school')
 
 function setError(error: string): never {
   throw new Error(error)
 }
+
+interface CSS {
+  [state: string]: string | number,
+}
+
+const css: CSS = {
+  width: '33px',
+  margin: '22px 44px'
+}
+
+// interface SetCss {
+//   (prop: string): CSS
+//   (prop: string, value: string): string[]
+// }
+
+function setCss(prop: string, value?: string): [string, string]
+function setCss(prop: string): CSS
+
+function setCss(prop: string, value?: string){ // (prop, value) -> add one /// (prop) -> remove one
+  if(value) {
+    css[prop] = value
+    return [prop, value]
+  } else {
+    return Object.entries(css)
+      .filter(f => f[0] !== prop )
+      .reduce((acc: CSS, item) => {
+        acc[item[0]] = item[1]
+        return acc
+      }, {})
+  }
+}
+
+setCss('height', '44px')
+setCss('margin')
+
+
