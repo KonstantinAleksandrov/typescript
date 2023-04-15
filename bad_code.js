@@ -1,17 +1,17 @@
-function deliveryMethod() {
+/* function deliveryMethod() {
   // TODO
   return 'overnight'
-}
+} */
 
-function shipWeight() {
+/* function shipWeight() {
   const el = document.getElementById('weight')
   if (!el) {
     return 0
   }
   return parseInt(el.innerHTML)
-}
+} */
 
-function sendUpdates(emailAddr) {
+/* function sendUpdates(emailAddr) {
   function sendEmail(addr) {
     console.log(`Shipping to ${addr} via ${deliveryMethod() || 'standard'} delivery`)
     if (shipWeight() > 100) {
@@ -26,4 +26,4 @@ function sendUpdates(emailAddr) {
   } else {
     sendEmail(emailAddr.trim())
   }
-}
+} */
