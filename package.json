@@ -1,0 +1,14 @@
+{
+  "name": "typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/KonstantinAleksandrov/typescript.git",
+  "author": "Greyewi <greyewi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.0.4"
+  },
+  "scripts": {
+    "compile": "tsc index.ts"
+  }
+}
