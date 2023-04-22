@@ -4,7 +4,7 @@
   "description": "",
   "main": "bad_code.js",
   "scripts": {
-    "start" : "tsc good_code.ts"
+    "start": "tsc index.ts"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/KonstantinAleksandrov/typescript#readme",
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^1.3.6",
     "typescript": "^5.0.4"
   }
 }

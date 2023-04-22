@@ -57,10 +57,7 @@ var vasya = __assign(__assign({}, human), { name: 'vasya', family: [
             mass: 69
         }
     ] });
-var css = {
-    width: '33px',
-    margin: '22px 44px'
-};
+var petya = __assign(__assign({}, human), { name: 'petya', graduation: 'high elementary school' });
 function getField(person, field) {
     return person[field];
 }
@@ -72,9 +69,34 @@ console.log(getName(vasya));
 var getAge = function (person) {
     return person.age;
 };
-function setValue(person, newName) {
-    person.name = newName;
+function setValue(student, newG) {
+    student.graduation = newG;
+    return newG;
 }
+setValue(petya, 'low elementary school');
 function setError(error) {
     throw new Error(error);
 }
+var css = {
+    width: '33px',
+    margin: '22px 44px'
+};
+var Personalization = /** @class */ (function () {
+    function Personalization(human) {
+        if (human === void 0) { human = {}; }
+        var _this = this;
+        this.setAge = function (age) {
+            if (_this.human) {
+                _this.human.age = age;
+            }
+        };
+        this.getAge = function () {
+            return _this.human.age;
+        };
+        this.human = human;
+    }
+    return Personalization;
+}());
+var myPerson = new Personalization({ age: 22 });
+myPerson.setAge(33);
+console.log(myPerson.getAge());

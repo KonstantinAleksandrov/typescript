@@ -1,3 +1,5 @@
+import * as axios from 'axios';
+
 let n: string = '4'
 const b: boolean = false
 const ob: object = {a: 33, b: {c: 33}}
@@ -38,9 +40,9 @@ console.log(teachers['Lubov'], teachers['Stepanovich'])
 
 
 interface Human {
-  age: number,
-  height: number,
-  mass: number,
+  age?: number,
+  height?: number,
+  mass?: number,
 }
 
 const human: Human = {
@@ -55,21 +57,13 @@ interface Person extends Human {
   family?: Human[]
 }
 
-const vasya: Person = {
+interface SinglePerson extends Omit<Person, "family"> {
+  hobbies: string
+}
+
+const vasya: Omit<Person, "family"> = {
   ...human,
   name: 'vasya',
-  family: [
-    {
-      age: 33,
-      height: 180,
-      mass: 69
-    },
-    {
-      age: 33,
-      height: 180,
-      mass: 69
-    }
-  ]
 }
 
 interface Student<T> extends Person {
@@ -85,8 +79,6 @@ const petya: Student<string> = {
   name: 'petya',
   graduation: 'high elementary school'
 }
-
-
 
 
 function getField(person: Person, field: string): string {
@@ -128,24 +120,91 @@ const css: CSS = {
 //   (prop: string, value: string): string[]
 // }
 
-function setCss(prop: string, value?: string): [string, string]
-function setCss(prop: string): CSS
+// function setCss(prop: string, value?: string): [string, string]
+// function setCss(prop: string): CSS
 
-function setCss(prop: string, value?: string){ // (prop, value) -> add one /// (prop) -> remove one
-  if(value) {
-    css[prop] = value
-    return [prop, value]
-  } else {
-    return Object.entries(css)
-      .filter(f => f[0] !== prop )
-      .reduce((acc: CSS, item) => {
-        acc[item[0]] = item[1]
-        return acc
-      }, {})
+// function setCss(prop: string, value?: string){ // (prop, value) -> add one /// (prop) -> remove one
+//   if(value) {
+//     css[prop] = value
+//     return [prop, value]
+//   } else {
+//     return Object.entries(css)
+//       .filter(f => f[0] !== prop )
+//       .reduce((acc: CSS, item) => {
+//         acc[item[0]] = item[1]
+//         return acc
+//       }, {})
+//   }
+// }
+
+// setCss('height', '44px')
+// setCss('margin')
+
+interface AbstractPersonalization {
+  human: Human
+}
+
+class DistinctHuman {
+  public readonly human: Human // public, private
+  constructor(human = {}) {
+    this.human = human
+  }
+
+  setAge = (age: number): void => {
+    if(this.human) {
+      this.human.age = age
+    }
+  }
+
+  getAge = (): number => {
+    return this.human.age
   }
 }
 
-setCss('height', '44px')
-setCss('margin')
 
 
+class DistinctPerson{
+  public person?: Person
+  constructor(person) {
+    this.person = person
+  }
+
+  setPerson = (person) => {
+    this.person = person
+  }
+
+  getPerson = () => {
+    return {...this.person}
+  }
+
+}
+
+class Personalization {
+  DistinctHuman: DistinctHuman
+/*
+* interface DistinctHuman {
+*  human: Human
+*  setAge(age: number): void
+*  getAge(): number
+* }
+* */
+  DistinctPerson: DistinctPerson
+
+  constructor(person, human) {
+    this.DistinctHuman = new DistinctHuman(human)
+    this.DistinctPerson = new DistinctPerson(person)
+  }
+
+  getData = () => {
+    return {...this.DistinctPerson.getPerson(), age: this.DistinctHuman.getAge()}
+  }
+}
+
+const myPerson = new Personalization(vasya, {age: 55})
+console.log(myPerson.getData())
+
+const mFetch = async ():Promise<any> => {
+  return axios.get('https://www.google.com/');
+}
+
+const getGoogle = mFetch()
