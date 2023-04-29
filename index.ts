@@ -208,3 +208,53 @@ const mFetch = async ():Promise<any> => {
 }
 
 const getGoogle = mFetch()
+
+
+
+
+
+interface Weapon<T> {
+  attack: number
+  requirements: T
+  type: 'one-hand' | 'two-hand'
+}
+
+interface SwordReq<T> {
+  strength: number,
+  class: T
+}
+
+const Fashion: Weapon<SwordReq<'swordsman' | 'babaritain'>> = {
+  attack: 47,
+  requirements: {
+    strength: 69,
+    class: 'swordsman'
+  },
+  type: 'one-hand'
+}
+
+
+const myList = new Map<string, unknown[]>([])
+
+myList.set('12', [{}, {}])
+
+
+const myUniqSet = new Set<number>()
+myUniqSet.add(2)
+
+
+const sum = <T,W>(a: T,b: W): number | string => {
+  if(Array.isArray(a)) {
+    a = a.reduce((acc, item) => acc + item, 0)
+  }
+
+  if(Array.isArray(b)) {
+    b = b.reduce((acc, item) => acc + item, 0)
+  }
+
+  return Number(a) + Number(b)
+}
+
+sum<number, number[]>(5, [1,2,3])
+
+sum<number[], number[]>([5, 4], [1,2,3])
